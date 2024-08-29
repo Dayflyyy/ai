@@ -1,20 +1,19 @@
 <template>
+
   <div id="ai">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <vs-card type="2">
       <template #title>
         <h3>NEVCHAT</h3>
       </template>
       <template #img>
-        <img src="../assets/LOGOdayfly.jpg" alt="" @click="active=!active" />
+        <img src="../assets/LOGOdayfly.jpg" alt="" @click="active = !active" />
       </template>
       <template #text>
         <p>智谱AI</p>
         <p>---------------为您的数据分析提供更好建议------------</p>
       </template>
       <template #interactions>
-        <vs-button danger icon>
-          <i class="bx bx-heart"></i>
-        </vs-button>
         <vs-button class="btn-chat" shadow primary>
           <i class="bx bx-chat"></i>
           <span class="span"> 54 </span>
@@ -25,6 +24,7 @@
       <template #header>
         <h4 class="not-margin">通过简单的对话开始数据分析！</h4>
       </template>
+      
       <transition name="fade">
         <div class="Usermessage">
           <div class="center grid" v-if="aftersendmessage">
@@ -47,24 +47,22 @@
       <template #footer>
         <div class="center content-inputs">
           <vs-input
-            blue
+            color="#7d33ff"
             state="您想问什么问题？"
             v-model="value"
             label-placeholder="您想问什么问题？"
             shadow
           />
-          <vs-button @click="sendmessage" success>提交</vs-button>
+          <vs-button gradient :active="active == 0" @click="sendmessage">
+            发送 <i class="bx bxs-paper-plane leftmargin"></i>
+          </vs-button>
         </div>
       </template>
     </vs-dialog>
-    <div class="box green"></div>
   </div>
-  
 </template>
 
 <script>
-
-
 export default {
   name: "AiModule",
   props: {
@@ -77,15 +75,28 @@ export default {
       aftersendmessage: false,
       message: "你好，我是机器人，有什么可以帮助你的吗？",
       request: "",
+      sending: false,
+      success: false,
+
+      loadingFace: false,
+      successFace: false,
     };
   },
   methods: {
     sendmessage() {
-      this.request = this.value;
-      this.aftersendmessage = true;
-      this.value = "";
+      const loading = this.$vs.loading({
+        type: "circles",
+        target: this.$refs.dialog,
+        text: "正在思考中...",
+      });
+      setTimeout(() => {
+        loading.close();
+        
+        this.request = this.value;
+        this.aftersendmessage = true;
+        this.value = "";
+      }, 1000);
     },
-    // showdialog
   },
 };
 </script>
@@ -114,12 +125,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  scale:200%;
 }
 .box {
   display: block;
 }
-.not-margin{
-    font-size: xx-large;
+.not-margin {
+  font-size: xx-large;
+}
+.leftmargin {
+  margin-left: 10px;
 }
 
 </style>
