@@ -25,7 +25,6 @@
           <vs-alert relief>
             <template #title> The ROBOT </template>
             <vue-markdown :source="answer"></vue-markdown>
-            <!-- {{ answer }} -->
           </vs-alert>
         </transition>
       </div>
@@ -99,25 +98,38 @@ export default {
     async handlePreposeQuestion(question) {
       this.active = true;
       this.question = question;
-      await this.sendmessage();
+      await this.sendmessage(); // 等待发送完成
     },
     async sendmessage() {
+      if (!this.question.trim()) { // 检查问题是否为空
+        this.$vs.notify({
+          title: "警告",
+          text: "问题不能为空！",
+          iconPack: "feather",
+          icon: "icon-alert-circle",
+          color: "warning",
+          position: "top-right",
+        });
+        return;
+      }
+
       this.active = true;
       const loading = this.$vs.loading({
         type: "circles",
         target: this.$refs.dialog,
         text: "正在思考中...",
       });
+      
       this.count++;
       try {
         const res = await customAxios.post("/chat", { question: this.question });
-        this.response = res.data.message;
+        this.answer = res.data.message; // 正确赋值
       } catch (error) {
         console.error("请求失败:", error);
+        this.answer = "抱歉，处理请求时出错了。";
       } finally {
         loading.close();
         this.request = this.question;
-        this.answer = this.response;
         this.isfirstsend = false;
         this.aftersendmessage = true;
         this.question = "";
@@ -137,14 +149,14 @@ export default {
 }
 .Usermessage {
   padding: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-right: 40px;
   word-wrap: break-word; /* 强制换行 */
   white-space: pre-wrap; /* 保留换行符和空白字符 */
 }
 .AiMessage {
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-left: 40px;
   word-wrap: break-word; /* 强制换行 */
   white-space: pre-wrap; /* 保留换行符和空白字符 */
@@ -164,12 +176,27 @@ export default {
 }
 .content-inputs {
   padding: 10px;
-  margin-top: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
 }
+.content-inputs-centered {
+  top: 75%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%) scale(2);
+}
+/* .content-inputs {
+  padding: 10px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+} */
 .cardquestion {
   padding: 10px;
   margin-bottom: 40px;
@@ -178,11 +205,11 @@ export default {
   align-items: center;
   transition: all 0.5s ease;
 }
-.content-inputs-centered {
+/* .content-inputs-centered {
   position: absolute;
   transform-origin: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(2);
-}
+} */
 </style>
