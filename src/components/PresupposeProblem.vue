@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-  <vs-card type="4">
+  <vs-card type="4" @click="">
     <template #title>
       <h3>查看全球新能源汽车销量</h3>
     </template>

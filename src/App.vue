@@ -2,7 +2,10 @@
   <div id="app">
     <vs-row justify="center">
       <vs-col>
+        <AiReport />
         <AiModule />
+        
+        
       </vs-col>
     </vs-row>
   </div>
@@ -10,11 +13,13 @@
 
 <script>
 import AiModule from "./components/AiModule.vue";
+import AiReport from "./components/AiReport.vue";
 
 export default {
   name: "App",
   components: {
     AiModule,
+    AiReport,
   },
 };
 </script>
