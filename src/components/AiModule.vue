@@ -29,7 +29,10 @@
           </vs-alert>
         </transition>
       </div>
-      <PresupposeProblem v-if="isfirstsend"></PresupposeProblem>
+      <PresupposeProblem
+        v-if="isfirstsend"
+        @preposequestion="handlePreposeQuestion"
+      ></PresupposeProblem>
 
       <template #footer>
         <div
@@ -55,7 +58,7 @@
 import PresupposeProblem from "./PresupposeProblem.vue";
 import AiEntry from "./AiEntry.vue";
 import axios from "axios";
-import VueMarkdown from 'vue-markdown';
+import VueMarkdown from "vue-markdown";
 
 const customAxios = axios.create({
   baseURL: "http://127.0.0.1:8000", // 替换为你需要的 baseURL
@@ -70,7 +73,7 @@ export default {
   components: {
     PresupposeProblem,
     AiEntry,
-    VueMarkdown
+    VueMarkdown,
   },
   props: {
     msg: String,
@@ -93,14 +96,18 @@ export default {
       this.question = "";
       this.isfirstsend = true;
     },
+    async handlePreposeQuestion(question) {
+      this.active = true;
+      this.question = question;
+      await this.sendmessage();
+    },
     async sendmessage() {
-      console.log(this.question);
+      this.active = true;
       const loading = this.$vs.loading({
         type: "circles",
         target: this.$refs.dialog,
         text: "正在思考中...",
       });
-      this.isfirstsend = false;
       this.count++;
       try {
         const res = await customAxios.post("/chat", { question: this.question });
@@ -111,6 +118,7 @@ export default {
         loading.close();
         this.request = this.question;
         this.answer = this.response;
+        this.isfirstsend = false;
         this.aftersendmessage = true;
         this.question = "";
       }
