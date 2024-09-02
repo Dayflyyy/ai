@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuesax from 'vuesax'
 import ElementUI from 'element-ui';
+import VueLazyload from 'vue-lazyload';
 
 import 'boxicons'
 import 'vuesax/dist/vuesax.css' //Vuesax styles
@@ -14,5 +15,7 @@ new Vue({
 }).$mount('#app')
 Vue.use(ElementUI);
 Vue.use(Vuesax)
+
+Vue.use(VueLazyload);
 
 

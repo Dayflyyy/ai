@@ -184,7 +184,7 @@ export default {
   width: 100%;
 }
 .content-inputs-centered {
-  top: 75%;
+  top: 90%;
   left: 50%;
   transform-origin: center;
   transform: translate(-50%, -50%) scale(2);

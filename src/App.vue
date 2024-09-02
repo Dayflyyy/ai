@@ -2,24 +2,20 @@
   <div id="app">
     <vs-row justify="center">
       <vs-col>
-        <AiReport />
-        <AiModule />
-        
-        
+        <!-- <AiModule /> -->
+        <AiAnalysis />
       </vs-col>
     </vs-row>
   </div>
 </template>
 
 <script>
-import AiModule from "./components/AiModule.vue";
-import AiReport from "./components/AiReport.vue";
+import AiAnalysis from "./components/AiAnalysis.vue";
 
 export default {
   name: "App",
   components: {
-    AiModule,
-    AiReport,
+    AiAnalysis,
   },
 };
 </script>

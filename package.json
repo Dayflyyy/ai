@@ -19,6 +19,7 @@
     "gsap": "^3.12.5",
     "portal-vue": "^3.0.0-beta.0",
     "vue": "^2.7.16",
+    "vue-lazyload": "^3.0.0",
     "vue-markdown": "^2.2.4",
     "vuesax": "^4.0.1-alpha.25"
   },
