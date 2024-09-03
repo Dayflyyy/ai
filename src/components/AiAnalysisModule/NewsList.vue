@@ -1,5 +1,10 @@
 <template>
   <div>
+    <h1>新闻列表</h1>
+    <el-skeleton :rows="6" animated :loading="!iscompleted" />
+
+    <p>{{ newsanaly }}</p>
+
     <vs-card-group>
       <vs-card v-for="card in 6" :key="card.label" @click="handleClick">
         <template #title>
@@ -22,10 +27,47 @@
         </template>
       </vs-card>
     </vs-card-group>
-    <h1>testdhasdsakd</h1>
   </div>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+  name: "BrandCardList",
+  props: {
+    question: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      newsanaly: "",
+      iscompleted: false,
+    };
+  },
+  watch: {
+    question: {
+      immediate: true,
+      handler(newQuestion) {
+        this.getnewsanaly(newQuestion);
+      },
+    },
+  },
+  methods: {
+    async getnewsanaly(question) {
+      try {
+        const response = await axios.post("http://localhost:8000/news_list", {
+          question,
+        });
+        this.newsanaly = response.data.content;
+        this.iscompleted = true;
+      } catch (error) {
+        console.error("Failed to fetch news analysis:", error);
+        this.newsanaly = "无法获取新闻分析内容";
+      }
+    },
+  },
+};
 </script>
 <style lang=""></style>

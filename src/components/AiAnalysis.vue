@@ -14,14 +14,39 @@
             @preposequestion="handlePreposeQuestion"
           ></PresupposeProblem>
           <ul class="infinite-list" v-infinite-scroll="load">
-            <component :is="BrandCard" v-if="using[0]"></component>
-            <component :is="BrandCardList" v-if="using[1]"></component>
-            <component :is="ChargeMap" v-if="using[2]"></component>
-            <component :is="NewsList" v-if="using[3]"></component>
-            <component :is="SalePredictYear" v-if="using[4]"></component>
-            <component :is="SalePredictMonth" v-if="using[5]"></component>
-            <component :is="TypeCard" v-if="using[6]"></component>
-            <component :is="TypeCardList" v-if="using[7]"></component>
+            <!-- 通过 :question 传递问题，监听 request-data 事件 -->
+            <component
+              :is="BrandCard"
+              v-if="using[0]"
+              :question="newquestion"
+            ></component>
+            <component
+              :is="BrandCardList"
+              v-if="using[1]"
+              :question="newquestion"
+            ></component>
+            <component
+              :is="ChargeMap"
+              v-if="using[2]"
+              :question="newquestion"
+            ></component>
+            <component :is="NewsList" v-if="using[3]" :question="newquestion"></component>
+            <component
+              :is="SalePredictYear"
+              v-if="using[4]"
+              :question="newquestion"
+            ></component>
+            <component
+              :is="SalePredictMonth"
+              v-if="using[5]"
+              :question="newquestion"
+            ></component>
+            <component :is="TypeCard" v-if="using[6]" :question="newquestion"></component>
+            <component
+              :is="TypeCardList"
+              v-if="using[7]"
+              :question="newquestion"
+            ></component>
           </ul>
         </div>
       </el-main>
@@ -60,10 +85,11 @@ export default {
   data() {
     return {
       question: "",
-      using: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      using: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       isfirstsend: true,
       active: false,
       answer: "",
+      newquestion:"",
     };
   },
   computed: {
@@ -125,9 +151,14 @@ export default {
       });
 
       this.count++;
+      console.log(this.question);
       try {
-        const res = await customAxios.post("/chat", { question: this.question });
-        this.answer = res.data.message; // 正确赋值
+        const res = await customAxios.post("/analysis", { question: this.question });
+        this.using = res.data.using; // 正确赋值
+        console.log(this.using);
+
+        this.newquestion= this.question;
+
       } catch (error) {
         console.error("请求失败:", error);
         this.answer = "抱歉，处理请求时出错了。";

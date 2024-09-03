@@ -1,6 +1,11 @@
-<template lang="">
-    <div>
-        <vs-card type="3">
+<template>
+  <div>
+    <h1>
+      车型卡片
+      <!-- {{ description }} -->
+    </h1>
+    <p>{{ typeanaly }}</p>
+    <vs-card type="3">
       <template #title>
         <h3>Pot with a plant</h3>
       </template>
@@ -20,14 +25,45 @@
         </vs-button>
       </template>
     </vs-card>
-
-    </div>
+  </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
-    
-}
+  name: "TypeCard",
+  props: {
+    question: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      typeanaly: "",
+    };
+  },
+  watch: {
+    question: {
+      immediate: true,
+      handler(newQuestion) {
+        this.gettypeanaly(newQuestion);
+      },
+    },
+  },
+  methods: {
+    async gettypeanaly(question) {
+      try {
+        const response = await axios.post("http://localhost:8000/type_card", {
+          question,
+        });
+        this.typeanaly = response.data.content;
+      } catch (error) {
+        console.error("Failed to fetch type analysis:", error);
+        this.typeanaly = "无法获取车型分析内容";
+      }
+    },
+  },
+};
 </script>
-<style lang="">
-    
-</style>
+<style lang=""></style>

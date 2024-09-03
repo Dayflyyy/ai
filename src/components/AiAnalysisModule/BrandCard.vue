@@ -1,14 +1,18 @@
 <template>
   <div>
+    <h1>品牌分析</h1>
+    <vue-markdown :source="brandanaly"></vue-markdown>
+    <el-skeleton :rows="6" animated :loading="!iscompleted" />
+    <p>{{ brandanaly }}</p>
     <vs-card type="3">
       <template #title>
-        <h3>Pot with a plant</h3>
+        <h3>{{ brandname }}</h3>
       </template>
       <template #img>
         <img src="../../assets/LOGOdayfly.jpg" alt="" />
       </template>
       <template #text>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+        <p>有关{{ brandname }}的介绍</p>
       </template>
       <template #interactions>
         <vs-button danger icon>
@@ -20,13 +24,52 @@
         </vs-button>
       </template>
     </vs-card>
-
   </div>
-
 </template>
+
 <script>
+import axios from "axios";
+import { VueMarkdown } from "vue-markdown";
+
 export default {
   name: "BrandCard",
+  props: {
+    question: {
+      type: String,
+      required: true,
+    },
+  },
+  components: {
+    VueMarkdown,
+  },
+  data() {
+    return {
+      brandanaly: "",
+      iscompleted: false,
+    };
+  },
+  watch: {
+    question: {
+      immediate: true,
+      handler(newQuestion) {
+        this.getbrandanaly(newQuestion);
+      },
+    },
+  },
+  methods: {
+    async getbrandanaly(question) {
+      try {
+        const response = await axios.post("http://localhost:8000/brand_card", {
+          question,
+        });
+        this.brandanaly = response.data.content;
+        console.log(this.brandanaly);
+        this.iscompleted = true;
+      } catch (error) {
+        console.error("Failed to fetch brand analysis:", error);
+        this.brandanaly = "无法获取品牌分析内容";
+      }
+    },
+  },
 };
 </script>
-<style lang=""></style>
