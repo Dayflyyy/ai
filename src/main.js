@@ -8,6 +8,7 @@ import 'boxicons'
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'element-ui/lib/theme-chalk/index.css';
 
+import BaiduMap from 'vue-baidu-map'
 
 Vue.config.productionTip = false
 new Vue({
@@ -17,5 +18,7 @@ Vue.use(ElementUI);
 Vue.use(Vuesax)
 
 Vue.use(VueLazyload);
-
+Vue.use(BaiduMap, {
+  ak: 'I1L1ViM8YJaLASfWpAZfEpLQmIrsjJG0'  
+})
 

@@ -8,13 +8,13 @@
         </h4>
       </el-header>
       <el-main class="modulebox">
+        <PresupposeProblem
+          v-if="isfirstsend"
+          @preposequestion="handlePreposeQuestion"
+          padding-top="40px" 
+        ></PresupposeProblem>
         <div class="scrollable-content">
-          <PresupposeProblem
-            v-if="isfirstsend"
-            @preposequestion="handlePreposeQuestion"
-          ></PresupposeProblem>
           <ul class="infinite-list" v-infinite-scroll="load">
-            <!-- 通过 :question 传递问题，监听 request-data 事件 -->
             <component
               :is="BrandCard"
               v-if="using[0]"
@@ -89,7 +89,7 @@ export default {
       isfirstsend: true,
       active: false,
       answer: "",
-      newquestion:"",
+      newquestion: "",
     };
   },
   computed: {
@@ -157,8 +157,7 @@ export default {
         this.using = res.data.using; // 正确赋值
         console.log(this.using);
 
-        this.newquestion= this.question;
-
+        this.newquestion = this.question;
       } catch (error) {
         console.error("请求失败:", error);
         this.answer = "抱歉，处理请求时出错了。";
@@ -177,7 +176,7 @@ export default {
 <style scoped>
 .content-inputs {
   position: fixed;
-  bottom: 40px;
+  bottom: 20px; /* 将输入框上移 */
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -188,7 +187,7 @@ export default {
 
 .not-margin {
   position: fixed;
-  top: 30px;
+  top: 20px; /* 将标题上移 */
   display: flex;
   width: 100%;
   justify-content: center;
@@ -198,10 +197,10 @@ export default {
 
 .modulebox {
   position: fixed;
-  top: 120px; /* 调整这个值来控制内容和标题的距离 */
+  top: 90px; /* 调整这个值来减少模块的顶部空间 */
   left: 0;
   right: 0;
-  bottom: 110px; /* 调整这个值来控制内容和输入框的距离 */
+  bottom: 90px; /* 调整这个值来减少模块的底部空间 */
   overflow: hidden;
 }
 

@@ -3,19 +3,22 @@
     <vs-row justify="center">
       <vs-col>
         <!-- <AiModule /> -->
-        <AiAnalysis />
+        <!-- <AiAnalysis /> -->
+        <ChargeMap></ChargeMap>
       </vs-col>
     </vs-row>
   </div>
 </template>
 
 <script>
-import AiAnalysis from "./components/AiAnalysis.vue";
+// import AiAnalysis from "./components/AiAnalysis.vue";
+import ChargeMap from './components/AiAnalysisModule/ChargeMap.vue';
+
 
 export default {
   name: "App",
   components: {
-    AiAnalysis,
+    ChargeMap
   },
 };
 </script>
