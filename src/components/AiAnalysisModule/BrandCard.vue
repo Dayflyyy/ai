@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>品牌分析</h1>
-    <vue-markdown :source="brandanaly"></vue-markdown>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />
     <p>{{ brandanaly }}</p>
     <vs-card type="3">
@@ -29,7 +28,6 @@
 
 <script>
 import axios from "axios";
-import { VueMarkdown } from "vue-markdown";
 
 export default {
   name: "BrandCard",
@@ -39,9 +37,7 @@ export default {
       required: true,
     },
   },
-  components: {
-    VueMarkdown,
-  },
+
   data() {
     return {
       brandanaly: "",

@@ -2,7 +2,6 @@
   <div>
     <h1>
       品牌列表
-      <!-- {{ description }} -->
     </h1>
     <vue-markdown :source="brandsanaly"></vue-markdown>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />

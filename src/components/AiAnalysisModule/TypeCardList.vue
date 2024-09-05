@@ -2,7 +2,6 @@
   <div>
     <h1>
       车型卡片列表
-      <!-- {{ description }} -->
     </h1>
     <p>对应的描述</p>
     <vs-card-group>
