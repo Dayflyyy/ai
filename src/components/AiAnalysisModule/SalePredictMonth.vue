@@ -80,4 +80,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.analysispart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.analysis {
+  max-width: 700px;
+}
+</style>

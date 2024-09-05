@@ -1,25 +1,23 @@
 <template>
   <div>
-    <h1>
-      品牌列表
-    </h1>
-    <vue-markdown :source="brandsanaly"></vue-markdown>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <h1>品牌列表</h1>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />
-
-    <p>
-      {{ brandsanaly }}
-    </p>
-
+    <div class="analysispart">
+      <p class="analysis">
+        {{ brandsanaly }}
+      </p>
+    </div>
     <vs-card-group>
-      <vs-card v-for="card in 6" :key="card.label" @click="handleClick">
+      <vs-card v-for="(brand, index) in brandlist" :key="index" @click="handleClick">
         <template #title>
-          <h3>{{ card }}</h3>
+          <h3>{{ brand.brandname }}</h3>
         </template>
         <template #img>
           <img src="../../assets/LOGOdayfly.jpg" alt="" />
         </template>
         <template #text>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+          <p>{{ brand.branddescription }}</p>
         </template>
         <template #interactions>
           <vs-button danger icon>
@@ -36,7 +34,6 @@
 </template>
 <script>
 import axios from "axios";
-import { VueMarkdown } from "vue-markdown";
 export default {
   name: "BrandCardList",
   props: {
@@ -45,12 +42,10 @@ export default {
       required: true,
     },
   },
-  components: {
-    VueMarkdown,
-  },
   data() {
     return {
       brandsanaly: "",
+      brandlist: [],
       iscompleted: false,
     };
   },
@@ -71,13 +66,28 @@ export default {
         console.log(response.data);
         console.log(response.data.content);
         this.brandsanaly = response.data.content;
+        this.brandlist = response.data.brandinfolist;
+        console.log(this.brandlist);
         this.iscompleted = true;
       } catch (error) {
         console.error("Failed to fetch brands analysis:", error);
         this.brandsanaly = "无法获取品牌分析内容";
+        this.iscompleted = true;
       }
     },
   },
 };
 </script>
-<style lang=""></style>
+<style>
+.analysispart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.analysis {
+  max-width: 700px;
+}
+</style>

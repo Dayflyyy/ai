@@ -2,8 +2,9 @@
   <div>
     <h1>特定年份销售预测</h1>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />
-
-    <p>{{ predictYear }}</p>
+    <div class="analysispart">
+      <p class="analysis">{{ predictYear }}</p>
+    </div>
 
     <div id="chart" style="width: 100%; height: 400px"></div>
   </div>
@@ -80,4 +81,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.analysispart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.analysis {
+  max-width: 700px;
+}
+</style>

@@ -1,57 +1,52 @@
 <template>
-  <div>
+  <div class="root">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <el-container>
-      <el-header>
-        <h4 class="not-margin">
-          <i class="bx bx-support rightmargin"></i>通过简单的对话开始数据分析！
-        </h4>
-      </el-header>
-      <el-main class="modulebox">
+    <div class="not-margin">
+      <div class="title">
+        <i class="bx bx-support rightmargin" margin-right="10px"></i>
+        <h4>你好，我是绿驰智能体</h4>
+      </div>
+      <p color="gray" class="subtitle">通过简单的对话开始数据分析！</p>
+    </div>
+    <div class="modulebox">
+      <div class="preposeproblempart">
         <PresupposeProblem
           v-if="isfirstsend"
           @preposequestion="handlePreposeQuestion"
-          padding-top="40px" 
+          class="preposeproblem"
         ></PresupposeProblem>
-        <div class="scrollable-content">
-          <ul class="infinite-list" v-infinite-scroll="load">
-            <component
-              :is="BrandCard"
-              v-if="using[0]"
-              :question="newquestion"
-            ></component>
-            <component
-              :is="BrandCardList"
-              v-if="using[1]"
-              :question="newquestion"
-            ></component>
-            <component
-              :is="ChargeMap"
-              v-if="using[2]"
-              :question="newquestion"
-            ></component>
-            <component :is="NewsList" v-if="using[3]" :question="newquestion"></component>
-            <component
-              :is="SalePredictYear"
-              v-if="using[4]"
-              :question="newquestion"
-            ></component>
-            <component
-              :is="SalePredictMonth"
-              v-if="using[5]"
-              :question="newquestion"
-            ></component>
-            <component :is="TypeCard" v-if="using[6]" :question="newquestion"></component>
-            <component
-              :is="TypeCardList"
-              v-if="using[7]"
-              :question="newquestion"
-            ></component>
-          </ul>
-        </div>
-      </el-main>
-      <el-footer></el-footer>
-    </el-container>
+      </div>
+
+      <div class="scrollable-content">
+        <ul class="infinite-list" v-infinite-scroll="load">
+          <component :is="BrandCard" v-if="using[0]" :question="newquestion"></component>
+          <component
+            :is="BrandCardList"
+            v-if="using[1]"
+            :question="newquestion"
+          ></component>
+          <component :is="ChargeMap" v-if="using[2]" :question="newquestion"></component>
+          <component :is="NewsList" v-if="using[3]" :question="newquestion"></component>
+          <component
+            :is="SalePredictYear"
+            v-if="using[4]"
+            :question="newquestion"
+          ></component>
+          <component
+            :is="SalePredictMonth"
+            v-if="using[5]"
+            :question="newquestion"
+          ></component>
+          <component :is="TypeCard" v-if="using[6]" :question="newquestion"></component>
+          <component
+            :is="TypeCardList"
+            v-if="using[7]"
+            :question="newquestion"
+          ></component>
+        </ul>
+      </div>
+    </div>
+
     <div class="content-inputs">
       <vs-input
         color="#7d33ff"
@@ -173,40 +168,80 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
+html,body{
+	height: 100%;
+}
+body{
+	margin: 0;
+}
+
+  /*
+.root {
+  background: linear-gradient(to right, #9fe1fa, #f4edc9);
+  height: 100%; /* 使背景色铺满屏幕 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .content-inputs {
   position: fixed;
-  bottom: 20px; /* 将输入框上移 */
+  bottom: 20px;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
   width: 100%;
 }
 
 .not-margin {
-  position: fixed;
-  top: 20px; /* 将标题上移 */
+  position: fixed; /* 使标题固定在页面顶部 
+  top: 30px;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* 保证标题显示在最上层 
+}
+
+.title {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   font-size: xx-large;
+  padding-right: 20px;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px; /* 将 subtitle 紧贴在 title 之下 
 }
 
 .modulebox {
   position: fixed;
-  top: 90px; /* 调整这个值来减少模块的顶部空间 */
+  top: 120px; /* 留出更多空间给标题和副标题 
   left: 0;
   right: 0;
-  bottom: 90px; /* 调整这个值来减少模块的底部空间 */
+  bottom: 90px;
   overflow: hidden;
+}
+
+.preposeproblem {
+  position: absolute;
+  top: 50%; /* 使其位于页面中央  
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .scrollable-content {
   height: 100%;
   overflow-y: auto;
-  padding: 10px; /* 可选：调整内容与边界的间距 */
-}
+  padding: 10px;
+}  */
 </style>

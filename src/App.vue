@@ -3,28 +3,31 @@
     <vs-row justify="center">
       <vs-col>
         <!-- <AiModule /> -->
-        <!-- <AiAnalysis /> -->
+        <AiAnalysis />
 
         <!-- <ChargeMap></ChargeMap> -->
 
         <!-- 单组件 -->
-        <TypeCard></TypeCard>
+       <!-- <TypeCard></TypeCard> -->
+        <!-- <BrandCard></BrandCard>  -->
       </vs-col>
     </vs-row>
   </div>
 </template>
 
 <script>
-//import AiAnalysis from "./components/AiAnalysis.vue";
+import AiAnalysis from "./components/AiAnalysis.vue";
 // import ChargeMap from './components/AiAnalysisModule/ChargeMap.vue';
-import TypeCard from './components/AiAnalysisModule/TypeCard.vue';
+// import BrandCard from './components/AiAnalysisModule/BrandCard.vue';
+// import TypeCard from './components/AiAnalysisModule/TypeCard.vue';
 
 
 export default {
   name: "App",
   components: {
-    TypeCard,
-    // AiAnalysis,
+    //TypeCard,
+    // BrandCard,
+    AiAnalysis,
     // ChargeMap,
   },
 };

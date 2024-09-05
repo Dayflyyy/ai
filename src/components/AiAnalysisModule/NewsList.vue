@@ -2,19 +2,22 @@
   <div>
     <h1>新闻列表</h1>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />
-
-    <p>{{ newsanaly }}</p>
+    <div class="analysispart">
+      <p class="analysis">
+        {{ newsanaly }}
+      </p>
+    </div>
 
     <vs-card-group>
-      <vs-card v-for="card in 6" :key="card.label" @click="handleClick">
+      <vs-card v-for="(news, index) in newList" :key="index" @click="handleClick(news)">
         <template #title>
-          <h3>{{ card }}</h3>
+          <h3>{{ news.newstitle || "Default Title" }}</h3>
         </template>
         <template #img>
-          <img src="../../assets/LOGOdayfly.jpg" alt="" />
+          <img src="news.newspic" alt="" />
         </template>
         <template #text>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+          <p>news.newsinfo</p>
         </template>
         <template #interactions>
           <vs-button danger icon>
@@ -44,6 +47,7 @@ export default {
     return {
       newsanaly: "",
       iscompleted: false,
+      newList: null,
     };
   },
   watch: {
@@ -62,12 +66,28 @@ export default {
         });
         this.newsanaly = response.data.content;
         this.iscompleted = true;
+        this.newList = response.data.newList;
       } catch (error) {
         console.error("Failed to fetch news analysis:", error);
         this.newsanaly = "无法获取新闻分析内容";
       }
     },
+    handleClick(news) {
+      window.location.href = news.newsurl;
+    },
   },
 };
 </script>
-<style lang=""></style>
+<style>
+.analysispart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.analysis {
+  max-width: 700px;
+}
+</style>

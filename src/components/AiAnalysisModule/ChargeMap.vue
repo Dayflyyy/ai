@@ -2,8 +2,11 @@
   <div>
     <h1>充电桩地图</h1>
     <el-skeleton :rows="6" animated :loading="!iscompleted" />
-
-    <p>{{ chargeanaly }}</p>
+    <div class="analysispart">
+      <p class="analysis">
+        {{ chargeanaly }}
+      </p>
+    </div>
     <el-card class="box-card" shadow="always">
       <baidu-map
         class="bm-view"
@@ -52,7 +55,7 @@ export default {
   data() {
     return {
       chargeanaly: "",
-      location: "南京",//只能到城市
+      location: "南京", //只能到城市
       iscompleted: false,
       center: {}, // 定位位置信息
       keyword: "充电桩", // 默认检索关键字
@@ -77,7 +80,7 @@ export default {
   },
 
   // mounted() {
-    
+
   // },
 
   methods: {
@@ -167,5 +170,16 @@ export default {
   align-items: center;
   width: 100%;
   box-shadow: 10px 10px 40px;
+}
+.analysispart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.analysis {
+  max-width: 700px;
 }
 </style>
