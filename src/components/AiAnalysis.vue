@@ -3,7 +3,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <div class="not-margin">
       <div class="title">
-        <i class="bx bx-support rightmargin" margin-right="10px"></i>
+        <i class="bx bx-support rightmargin" margin-right="20px"></i>
         <h4>你好，我是绿驰智能体</h4>
       </div>
       <p color="gray" class="subtitle">通过简单的对话开始数据分析！</p>
@@ -14,11 +14,30 @@
           v-if="isfirstsend"
           @preposequestion="handlePreposeQuestion"
           class="preposeproblem"
-        ></PresupposeProblem>
+        >
+        </PresupposeProblem>
       </div>
 
       <div class="scrollable-content">
         <ul class="infinite-list" v-infinite-scroll="load">
+          <component
+            :is="AiCommonAnswer"
+            :v-if="
+              !(
+                this.using[0] ||
+                this.using[1] ||
+                this.using[2] ||
+                this.using[3] ||
+                this.using[4] ||
+                this.using[5] ||
+                this.using[6] ||
+                this.using[7] ||
+                this.using[8] ||
+                this.using[9]
+              )
+            "
+            :question="newquestion"
+          ></component>
           <component :is="BrandCard" v-if="using[0]" :question="newquestion"></component>
           <component
             :is="BrandCardList"
@@ -47,16 +66,19 @@
       </div>
     </div>
 
-    <div class="content-inputs">
-      <vs-input
-        color="#7d33ff"
-        v-model="question"
-        label-placeholder="您想问什么问题？"
-        shadow
-      />
-      <vs-button gradient @click="sendmessage()">
-        发送 <i class="bx bxs-paper-plane leftmargin"></i>
-      </vs-button>
+    <div id="down">
+      <div class="content-inputs">
+        <textarea
+          cols="135"
+          rows="8"
+          placeholder="您想问什么问题？"
+          v-model="question"
+        ></textarea>
+        <vs-button gradient @click="sendmessage()">
+          发送 <i class="bx bxs-paper-plane leftmargin"></i>
+        </vs-button>
+      </div>
+      <span>这是责任说明，文字后续修改</span>
     </div>
   </div>
 </template>
@@ -80,7 +102,8 @@ export default {
   data() {
     return {
       question: "",
-      using: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      using: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+
       isfirstsend: true,
       active: false,
       answer: "",
@@ -89,6 +112,23 @@ export default {
   },
   computed: {
     // 使用计算属性动态加载组件
+    AiCommonAnswer() {
+      return !(
+        this.using[0] ||
+        this.using[1] ||
+        this.using[2] ||
+        this.using[3] ||
+        this.using[4] ||
+        this.using[5] ||
+        this.using[6] ||
+        this.using[7] ||
+        this.using[8] ||
+        this.using[9]
+      )
+        ? () => import("./AiAnalysisModule/AiCommonAnswer.vue")
+        : null;
+    },
+
     BrandCard() {
       return this.using[0] ? () => import("./AiAnalysisModule/BrandCard.vue") : null;
     },
@@ -169,79 +209,118 @@ export default {
 </script>
 
 <style>
+  .preposeproblempart {
+    width: 65%;
+    position: absolute;
+    left: 17.5%;
+    top: 30%;
+  }
 
-html,body{
-	height: 100%;
-}
-body{
-	margin: 0;
-}
+  .content-inputs textarea {
+    font-family: "微软正黑体";
+    resize: none;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
 
-  /*
-.root {
-  background: linear-gradient(to right, #9fe1fa, #f4edc9);
-  height: 100%; /* 使背景色铺满屏幕 
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-.content-inputs {
-  position: fixed;
-  bottom: 20px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
+  #down {
+    position: fixed;
+    bottom: 2%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    height: 20%;
+  }
 
-.not-margin {
-  position: fixed; /* 使标题固定在页面顶部 
-  top: 30px;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10; /* 保证标题显示在最上层 
-}
+  .root {
+    /* background: linear-gradient(to right, #9fe1fa, #f4edc9);
+    height: 100%;
+    /* 使背景色铺满屏幕
+    width: 100%; */
+    display: flex;
+    flex-direction: column;
+  }
 
-.title {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  font-size: xx-large;
-  padding-right: 20px;
-}
+  .content-inputs {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 80%;
+    background-color: azure;
+    border-radius: 15px;
+    box-shadow: -1px 1px 3px rgb(36, 36, 36);
+    margin-bottom: 0.8%;
+  }
 
-.subtitle {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px; /* 将 subtitle 紧贴在 title 之下 
-}
+  .not-margin {
+    margin-top: 1%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    /* 保证标题显示在最上层 */
+  }
 
-.modulebox {
-  position: fixed;
-  top: 120px; /* 留出更多空间给标题和副标题 
-  left: 0;
-  right: 0;
-  bottom: 90px;
-  overflow: hidden;
-}
+  .not-margin i {
+    font-size: 50px;
+  }
 
-.preposeproblem {
-  position: absolute;
-  top: 50%; /* 使其位于页面中央  
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  .title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    padding-right: 20px;
+  }
 
-.scrollable-content {
-  height: 100%;
-  overflow-y: auto;
-  padding: 10px;
-}  */
+  .subtitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    color: rgb(110, 110, 110);
+    /* 将 subtitle 紧贴在 title 之下 */
+  }
+
+  h4 {
+    margin: 1% 0;
+    top: 20px;
+    font-size: 45px;
+    font-weight: 900;
+    font-family: "思源黑体";
+  }
+
+  .modulebox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #down span {
+    color: rgb(110, 110, 110);
+    font-size: 15px;
+  }
+
+
+  .scrollable-content {
+    width:40%;
+    overflow-y: auto;
+    padding: 10px;
+  }
 </style>
