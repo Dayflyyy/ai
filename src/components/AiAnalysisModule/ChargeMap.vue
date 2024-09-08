@@ -93,9 +93,9 @@ export default {
         console.log(response.data.content);
         this.chargeanaly = response.data.content;
         this.area = response.data.area || "南京";
-        this.initMap();
-        this.searchKeyword();
+        console.log(this.area);
         this.iscompleted = true;
+
       } catch (error) {
         console.error("Failed to fetch charge analysis:", error);
         this.chargeanaly = "无法获取充电桩分析内容";

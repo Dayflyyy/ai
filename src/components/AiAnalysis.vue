@@ -4,9 +4,9 @@
     <div class="not-margin">
       <div class="title">
         <i class="bx bx-support rightmargin" margin-right="20px"></i>
-        <h4>你好，我是绿驰智能体</h4>
+        <h4>你好，我是绿驰智能</h4>
       </div>
-      <p color="gray" class="subtitle">通过简单的对话开始数据分析！</p>
+      <p color="gray" class="subtitle">新能源汽车领域AI大模型助手，通过简单的对话开始数据分析！</p>
     </div>
     <div class="modulebox">
       <div class="preposeproblempart">
@@ -68,17 +68,18 @@
 
     <div id="down">
       <div class="content-inputs">
+        <i class="bx bx-user" margin-right="20px"></i>
         <textarea
           cols="135"
-          rows="8"
-          placeholder="您想问什么问题？"
+          rows="1"
+          placeholder="   试着问我：有哪些推荐的投资的新能源车企？   "
           v-model="question"
         ></textarea>
         <vs-button gradient @click="sendmessage()">
           发送 <i class="bx bxs-paper-plane leftmargin"></i>
         </vs-button>
       </div>
-      <span>这是责任说明，文字后续修改</span>
+      <span>内容由 AI 大模型生成，请仔细甄别,其生成内容的准确性和完整性无法保证，不代表我们的态度或观点</span>
     </div>
   </div>
 </template>
@@ -209,118 +210,118 @@ export default {
 </script>
 
 <style>
-  .preposeproblempart {
-    width: 65%;
-    position: absolute;
-    left: 17.5%;
-    top: 30%;
-  }
+.preposeproblempart {
+  width: 65%;
+  position: absolute;
+  left: 17.5%;
+  top: 30%;
+}
 
-  .content-inputs textarea {
-    font-family: "微软正黑体";
-    resize: none;
-    border: none;
-    background-color: transparent;
-    outline: none;
-  }
+.content-inputs textarea {
+  font-family: "微软正黑体";
+  resize: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
 
-  html,
-  body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  #down {
-    position: fixed;
-    bottom: 2%;
-    width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    height: 20%;
-  }
+#down {
+  position: fixed;
+  bottom: 2%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  height: 20%;
+}
 
-  .root {
-    /* background: linear-gradient(to right, #9fe1fa, #f4edc9);
+.root {
+  /* background: linear-gradient(to right, #9fe1fa, #f4edc9);
     height: 100%;
     /* 使背景色铺满屏幕
     width: 100%; */
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  .content-inputs {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    height: 80%;
-    background-color: azure;
-    border-radius: 15px;
-    box-shadow: -1px 1px 3px rgb(36, 36, 36);
-    margin-bottom: 0.8%;
-  }
+.content-inputs {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 80%;
+  border-radius: 15px;
+  box-shadow: -1px 1px 3px rgb(36, 36, 36);
+  margin-bottom: 0.8%;
+}
 
-  .not-margin {
-    margin-top: 1%;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 10;
-    /* 保证标题显示在最上层 */
-  }
+.not-margin {
+  margin-top: 1%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  /* 保证标题显示在最上层 */
+}
 
-  .not-margin i {
-    font-size: 50px;
-  }
+.not-margin i {
+  font-size: 50px;
+}
 
-  .title {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
-    padding-right: 20px;
-  }
+.title {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  padding-right: 20px;
+}
 
-  .subtitle {
-    display: flex;
-    justify-content: center;
-    margin-top: 5px;
-    color: rgb(110, 110, 110);
-    /* 将 subtitle 紧贴在 title 之下 */
-  }
+.subtitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  color: rgb(110, 110, 110);
+  /* 将 subtitle 紧贴在 title 之下 */
+}
 
-  h4 {
-    margin: 1% 0;
-    top: 20px;
-    font-size: 45px;
-    font-weight: 900;
-    font-family: "思源黑体";
-  }
+h4 {
+  margin: 1% 0;
+  top: 20px;
+  font-size: 45px;
+  font-weight: 900;
+  font-family: "思源黑体";
+}
 
-  .modulebox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-  }
+.modulebox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
 
-  #down span {
-    color: rgb(110, 110, 110);
-    font-size: 15px;
-  }
+#down span {
+  color: rgb(110, 110, 110);
+  font-size: 10px;
+  padding-top: 20px; /* 增加上边距 */
+  padding-bottom: 20px; /* 增加下边距 */
+}
 
-
-  .scrollable-content {
-    width:40%;
-    overflow-y: auto;
-    padding: 10px;
-  }
+.scrollable-content {
+  width: auto;
+  overflow-y: auto;
+  padding: 10px;
+}
 </style>

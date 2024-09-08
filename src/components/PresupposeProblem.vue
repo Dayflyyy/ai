@@ -20,7 +20,7 @@
         </vs-button>
       </template>
     </vs-card>
-    <vs-card type="4" @click="preposequestion('查看全国充电桩分布')">
+    <vs-card type="4" @click="preposequestion('目前全国的新能源充电桩分布在哪些城市')">
       <template #title>
         <h3>查看全国充电桩分布</h3>
       </template>
