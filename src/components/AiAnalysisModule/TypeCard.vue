@@ -2,7 +2,7 @@
   <div>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <h1>车型介绍</h1>
-    <!-- <el-skeleton :rows="6" animated :loading="!iscompleted" /> -->
+    <el-skeleton :rows="6" animated :loading="!iscompleted" />
     <div class="analysispart">
       <p class="analysis">
         {{ typeanaly }}
@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "../../axios.js";
 
 export default {
   name: "TypeCard",
@@ -47,6 +47,7 @@ export default {
     return {
       typeanaly: "",
       typename: "",
+      typeinfo: "",
       description: "",
       iscompleted: false,
     };
@@ -62,7 +63,7 @@ export default {
   methods: {
     async gettypeanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/type_card", {
+        const response = await axios.post("/type_card", {
           question,
         });
         this.typeanaly = response.data.content;

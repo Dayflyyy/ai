@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios.js";
 import { BaiduMap, BmLocalSearch, BmGeolocation } from "vue-baidu-map";
 
 export default {
@@ -86,7 +86,7 @@ export default {
   methods: {
     async getchargeanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/charge_map", {
+        const response = await axios.post("/charge_map", {
           question,
         });
         console.log(response.data);

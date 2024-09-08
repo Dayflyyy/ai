@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from "../axios"
+import axios from "../../axios.js"
 
 export default {
   name: "BrandCard",
@@ -62,7 +62,7 @@ export default {
   methods: {
     async getbrandanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/brand_card", {
+        const response = await axios.post("/brand_card", {
           question,
         });
         this.brandanaly = response.data.content;

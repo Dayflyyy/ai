@@ -39,10 +39,11 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios.js";
 
 export default {
   name: "TypeCardList",
+
   data() {
     return {
       typesanaly: "", // 分析的内容
@@ -54,7 +55,7 @@ export default {
     // 获取车型数据
     async gettypesanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/type_card", {
+        const response = await axios.post("/type_card", {
           question,
         });
         // 解析接口返回的数据

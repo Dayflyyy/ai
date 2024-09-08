@@ -12,7 +12,7 @@
 
 <script>
 import * as echarts from "echarts";
-import axios from "axios";
+import axios from "../../axios.js";
 
 export default {
   name: "SalePredictYear",
@@ -45,7 +45,7 @@ export default {
   methods: {
     async fetchYearPrediction(question) {
       try {
-        const response = await axios.post("http://localhost:8000/sale_predict_year", {
+        const response = await axios.post("/sale_predict_year", {
           question,
         });
         this.predictYear = response.data.content; // 假设API返回的描述信息

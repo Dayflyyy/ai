@@ -85,15 +85,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios.js";
 
-const customAxios = axios.create({
-  baseURL: "http://127.0.0.1:8000", // 替换为你需要的 baseURL
-  timeout: 10000, // 设置请求超时时间（可选）
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 export default {
   name: "AiAnalysis",
@@ -189,7 +182,7 @@ export default {
       this.count++;
       console.log(this.question);
       try {
-        const res = await customAxios.post("/analysis", { question: this.question });
+        const res = await axios.post("/analysis", { question: this.question });
         this.using = res.data.using; // 正确赋值
         console.log(this.using);
 

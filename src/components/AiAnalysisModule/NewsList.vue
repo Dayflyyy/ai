@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "../../axios.js";
 export default {
   name: "BrandCardList",
   props: {
@@ -61,7 +61,7 @@ export default {
   methods: {
     async getnewsanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/news_list", {
+        const response = await axios.post("/news_list", {
           question,
         });
         this.newsanaly = response.data.content;

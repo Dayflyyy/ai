@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from "../../axios.js";
 export default {
   name: "BrandCardList",
   props: {
@@ -60,7 +60,7 @@ export default {
   methods: {
     async getbrandsanaly(question) {
       try {
-        const response = await axios.post("http://localhost:8000/brand_card_list", {
+        const response = await axios.post("/brand_card_list", {
           question,
         });
         console.log(response.data);

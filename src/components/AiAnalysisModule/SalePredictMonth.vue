@@ -11,7 +11,7 @@
 
 <script>
 import * as echarts from "echarts";
-import axios from "axios";
+import axios from "../../axios.js";
 
 export default {
   name: "SalePredictMonth",
@@ -44,7 +44,7 @@ export default {
   methods: {
     async fetchMonthPrediction(question) {
       try {
-        const response = await axios.post("http://localhost:8000/sale_predict_month", {
+        const response = await axios.post("/sale_predict_month", {
           question,
         });
         this.predictmonth = response.data.content;
