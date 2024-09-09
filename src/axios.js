@@ -1,10 +1,22 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000', // 你的 API 基础 URL
+  baseURL: 'https://971d-2001-da8-1002-6004-00-1-31f1.ngrok-free.app', // 你的 API 基础 URL
   timeout: 10000, // 请求超时时间
   headers: { 'Content-Type': 'application/json' }
 });
+//
+export async function fetchWithStream(url, data = {}) {
+    const response = await fetch(instance.defaults.baseURL + url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      body: JSON.stringify(data),
+    });
+  
+    return response;
+  }
 
 // 你还可以添加拦截器
 instance.interceptors.request.use(

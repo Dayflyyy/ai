@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { fetchWithStream } from "../../axios"; // 从 axios.js 引入封装的流式响应方法
 
 export default {
   props: {
@@ -47,33 +48,23 @@ export default {
     },
   },
   methods: {
-
     async sendQuestion() {
       console.log("通用回答模块");
       console.log(this.question);
       if (this.question) {
-        
         this.currentChunk = ""; // 清空当前块
         this.chunkIndex = 0; // 重置索引
         const data = { question: this.question };
 
-        // 调用流式响应处理函数
+        // 调用封装好的流式响应处理函数
         await this.readChatbotReply("/commonanswer", data);
       }
     },
-    // 定义流式响应的处理函数，使用 SSE 技术
+    // 使用封装好的 fetchWithStream 处理流式响应
     async readChatbotReply(url, data = {}) {
-      const response = await fetch("http://127.0.0.1:8000" + url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        body: JSON.stringify(data),
-      });
-
+      const response = await fetchWithStream(url, data);
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-
       /* eslint-disable no-constant-condition */
       while (true) {
         const { value, done } = await reader.read();
