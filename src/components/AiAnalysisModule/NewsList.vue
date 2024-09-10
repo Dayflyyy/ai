@@ -15,7 +15,7 @@
           <h3>{{ news.newstitle || "Default Title" }}</h3>
         </template>
         <template #img>
-          <img src="../../assets/" alt="news image" />
+          <img :src="news.newspic" alt="news image" />
         </template>
         <template #text>
           <p>{{ news.newsinfo || "Default info" }}</p>
