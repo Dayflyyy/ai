@@ -19,7 +19,7 @@
       </div>
 
       <div class="scrollable-content">
-        <ul class="infinite-list" v-infinite-scroll="load">
+       
           <component
             :is="AiCommonAnswer"
             :v-if="
@@ -62,7 +62,7 @@
             v-if="using[7]"
             :question="newquestion"
           ></component>
-        </ul>
+       
       </div>
     </div>
 
@@ -313,7 +313,8 @@ h4 {
 }
 
 .scrollable-content {
-  width: auto;
+  width: 70%;
+  height: 400px; /* 限制 modulebox 的高度 */
   overflow-y: auto;
   padding: 10px;
 }

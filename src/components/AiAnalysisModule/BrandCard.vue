@@ -13,7 +13,7 @@
           <h3>{{ brandinfo.brandname }}</h3>
         </template>
         <template #img>
-          <img src="../../assets/LOGOdayfly.jpg" alt="" />
+          <img :src="brandinfo.brandpicurl" alt="" />
         </template>
         <template #text>
           <p>{{ brandinfo.branddescription }}</p>

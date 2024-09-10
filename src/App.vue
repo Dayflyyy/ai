@@ -15,14 +15,14 @@
   </div>
 </template>
 
-<script>
+// <script>
 import AiAnalysis from "./components/AiAnalysis.vue";
 // import ChargeMap from './components/AiAnalysisModule/ChargeMap.vue';
 // import BrandCard from './components/AiAnalysisModule/BrandCard.vue';
 // import TypeCard from './components/AiAnalysisModule/TypeCard.vue';
 // import AiCommonAnswer from "./components/AiAnalysisModule/AiCommonAnswer.vue";
 // import AiModule from "./components/AiModule.vue"
-import webSocketService from './webSocketService';
+// import webSocketService from './webSocketService';
 export default {
   name: "App",
   components: {
@@ -34,9 +34,7 @@ export default {
     // AiModule,
   },
 
-  mounted() {
-    webSocketService.sendMessage('Hello WebSocket');
-  },
+ 
 
   method(){
     console.log('app')

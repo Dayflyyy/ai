@@ -32,6 +32,7 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       currentChunk: "", // 当前接收到的流式数据块,逐渐更新

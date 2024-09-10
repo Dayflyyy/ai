@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://971d-2001-da8-1002-6004-00-1-31f1.ngrok-free.app', // 你的 API 基础 URL
-  timeout: 10000, // 请求超时时间
+  baseURL: 'http://localhost:8000', // 你的 API 基础 URL
+  timeout: 20000, // 请求超时时间
   headers: { 'Content-Type': 'application/json' }
 });
 //

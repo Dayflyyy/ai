@@ -89,8 +89,7 @@ export default {
         const response = await axios.post("/charge_map", {
           question,
         });
-        console.log(response.data);
-        console.log(response.data.content);
+        console.log("chargemap："+response.data.content);
         this.chargeanaly = response.data.content;
         this.area = response.data.area || "南京";
         console.log(this.area);
