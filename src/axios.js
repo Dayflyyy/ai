@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000', // 你的 API 基础 URL
+  baseURL: 'https://aa7e-122-96-148-10.ngrok-free.app', // 你的 API 基础 URL
   timeout: 20000, // 请求超时时间
   headers: { 'Content-Type': 'application/json' }
 });
@@ -18,7 +18,7 @@ export async function fetchWithStream(url, data = {}) {
     return response;
   }
 
-// 你还可以添加拦截器
+//拦截器
 instance.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么，比如添加 token
